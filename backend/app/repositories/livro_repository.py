@@ -6,6 +6,12 @@ class LivroRepository(BaseRepository[LivroModel]):
     def __init__(self, db: Session):
         super().__init__(LivroModel, db)
 
+    def get_all(self):
+        return self.db.query(self.model).all()
+    
+    def get_by_id(self, livro_id: int) -> LivroModel | None:
+        return self.db.query(self.model).filter(self.model.id == livro_id).first()
+
     def get_by_titulo(self, titulo: str) -> list[LivroModel]:
         return self.db.query(self.model).filter(self.model.titulo.ilike(f"%{titulo}%")).all()
 

@@ -22,6 +22,9 @@ class EmprestimoService:
                 detail="Empréstimo não encontrado",
             )
         return emprestimo
+    
+    def buscar_por_cpf(self, cpf: str) -> list[EmprestimoModel]:
+        return self.repo.get_by_cpf(cpf)
 
     def listar_atrasados(self) -> list[EmprestimoModel]:
         return self.repo.get_atrasados()
